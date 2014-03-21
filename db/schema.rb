@@ -11,9 +11,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20140321044926) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "drivers", force: true do |t|
+    t.string   "name"
+    t.string   "location"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "phone"
+  end
+
+  create_table "passengers", force: true do |t|
+    t.string   "name"
+    t.integer  "phone"
+    t.string   "location"
+    t.string   "child_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "rides", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
