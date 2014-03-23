@@ -1,14 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html ng-app>
 <head>
-  <title>Saferide</title>
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <script type="text/javascript"
+    src="https://maps.googleapis.com/maps/api/js?keyAIzaSyCfXwZQUEY0loMoDt-4U9aBTCfn7BkozzQ&sensor=true">
+  </script>
+  <script src="angular.min.js"></script>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
+
+<style>
+      
+</style>
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+ 
+
 </head>
+
+
 <body>
 
+  <div id="container">
+    <div id="user_nav">
+      <% if current_user %>
+        Signed in as <strong><%= current_user.name %></strong>!
+        <%= link_to "Sign Out", signout_path, id:"sign_out" %>
+      <% else %>
+        <%= link_to  "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
+      <% end %> 
+    </div>
+
+
+
+    <% flash.each do |name, msg| %>
+      <%= content_tag :div, msg, id: "flash_#{name}"%>
+    <% end %>
+
+</div>
+<div id="map-canvas">
+    </div>
+
 <%= yield %>
+
 
 </body>
 </html>
