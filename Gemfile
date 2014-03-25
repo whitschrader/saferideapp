@@ -6,6 +6,14 @@ gem 'rails', '4.0.4'
 # adding postgres for heroku
 gem 'pg'
 
+# for angular to rails
+gem "angularjs-rails", "~> 1.0.8"
+
+
+
+# Use CoffeeScript for .js.coffee assets and views
+gem 'coffee-rails', '~> 4.0.0'
+
 # This makes it so the app logs in a way that Heroku likes.
 gem 'rails_12factor', :group => :production
 
@@ -51,8 +59,6 @@ group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
 end
-
-gem 'coffee-rails', '~> 4.0.0'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140321074813) do
+ActiveRecord::Schema.define(version: 20140325015315) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20140321074813) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "phone"
+    t.string   "status"
   end
 
   create_table "passengers", force: true do |t|
@@ -31,11 +32,21 @@ ActiveRecord::Schema.define(version: 20140321074813) do
     t.string   "child_name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "status"
   end
 
   create_table "rides", force: true do |t|
+    t.float    "pickup_lat"
+    t.float    "pickup_long"
+    t.integer  "driver_id"
+    t.integer  "passenger_id"
+    t.boolean  "started"
+    t.boolean  "canceled"
+    t.boolean  "completed"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.float    "dropoff_lat"
+    t.float    "dropoff_long"
   end
 
   create_table "users", force: true do |t|
@@ -46,6 +57,7 @@ ActiveRecord::Schema.define(version: 20140321074813) do
     t.datetime "oauth_expires_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "image"
   end
 
 end

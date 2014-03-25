@@ -1,11 +1,12 @@
 
-    function initialize() {
-      var mapOptions = {
-        // center: new google.maps.LatLng(-34.397, 150.644),
-        zoom: 14,
-      };
-        map = new google.maps.Map(document.getElementById('map-canvas'),
-    mapOptions);
+function initialize() {
+  var mapOptions = {
+    // center: new google.maps.LatLng(-34.397, 150.644),
+    zoom: 14,
+  };
+  
+  map = new google.maps.Map(document.getElementById('map-canvas'),
+mapOptions);
 
   // Try HTML5 geolocation
   if(navigator.geolocation) {
@@ -18,17 +19,60 @@
       //   content: 'Location found using HTML5.'
       // });
 
-      var marker = new google.maps.Marker({
+      // var control = document.createElement('div'); 
+
+      // google.maps.event.addDomListener(control, 'click', function() {...}); 
+      // control.index = 1;   
+      //   map.controls[google.maps.ControlPosition.TOP_RIGHT].push(control);  
+
+      var start_marker = new google.maps.Marker({
         position: pos,
         map: map,
-        title: 'Hello World!',
+        title: 'Start',
         draggable:true,
       });
 
+      var end_marker = new google.maps.Marker({
+        position: pos,
+        map: map,
+        title: 'Stop',
+        draggable:true,
+      });
 
-      google.maps.event.addListener(marker, 'click', function() { 
-       alert("I am marker " + marker.title); 
+      var InfoWindowOptions = {
+        content: 'Test!'
+      };
+
+//      var InfoWindow = new google.maps.InfoWindow(InfoWindowOptions);
+//      google.maps.event.addListener(new_marker,'click',function(e){
+//        infoWindow.open(map, marker);
+//      });
+
+
+      google.maps.event.addListener(start_marker, 'click', function() { 
+       alert("I am marker " + start_marker.title); 
     }); 
+
+      $("#getRide").click(function() {
+
+        var data = {ride: {
+          pickup_long: start_marker.position.A, 
+          pickup_lat: start_marker.position.k,
+          dropoff_long: end_marker.position.A, 
+          dropoff_lat: end_marker.position.k
+        }};
+        $.ajax({
+          type: "post",
+          url: "/rides",
+          data: data
+        }).done(function( response ) {
+          alert( ("Requesting Drivers"));
+        });
+
+        alert(JSON.stringify(data));
+      });
+
+
 
       map.setCenter(pos);
     }, 
@@ -55,8 +99,6 @@ function handleNoGeolocation(errorFlag) {
     content: content
   };
 
-  var infowindow = new google.maps.InfoWindow(options);
-  map.setCenter(options.position);
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);

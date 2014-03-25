@@ -25,3 +25,9 @@ body {
   height: 100%;
   z-index:1; 
 }
+
+.requestRide {
+  padding-top: 10px;
+  margin-top: -10em;
+  z-index: 5;
+}
