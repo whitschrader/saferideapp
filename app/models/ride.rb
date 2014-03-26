@@ -1,4 +1,4 @@
 class Ride < ActiveRecord::Base
-  belongs_to :passenger
-  belongs_to :driver
+  has_many :connections
+  has_many :users, through: :connections
 end

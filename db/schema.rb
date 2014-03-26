@@ -11,35 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140325015315) do
+ActiveRecord::Schema.define(version: 20140326005450) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "drivers", force: true do |t|
-    t.string   "name"
-    t.string   "location"
+  create_table "connections", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "ride_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "phone"
-    t.string   "status"
   end
 
-  create_table "passengers", force: true do |t|
-    t.string   "name"
-    t.integer  "phone"
-    t.string   "location"
-    t.string   "child_name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "status"
-  end
+  add_index "connections", ["ride_id"], name: "index_connections_on_ride_id", using: :btree
+  add_index "connections", ["user_id"], name: "index_connections_on_user_id", using: :btree
 
   create_table "rides", force: true do |t|
     t.float    "pickup_lat"
     t.float    "pickup_long"
-    t.integer  "driver_id"
-    t.integer  "passenger_id"
     t.boolean  "started"
     t.boolean  "canceled"
     t.boolean  "completed"
@@ -55,6 +44,11 @@ ActiveRecord::Schema.define(version: 20140325015315) do
     t.string   "name"
     t.string   "oauth_token"
     t.datetime "oauth_expires_at"
+    t.integer  "phone"
+    t.float    "current_lat"
+    t.float    "current_long"
+    t.string   "status"
+    t.string   "role"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "image"

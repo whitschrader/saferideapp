@@ -6,7 +6,9 @@ function initialize() {
   };
   
   map = new google.maps.Map(document.getElementById('map-canvas'),
-mapOptions);
+    mapOptions);
+
+
 
   // Try HTML5 geolocation
   if(navigator.geolocation) {
@@ -29,6 +31,7 @@ mapOptions);
         position: pos,
         map: map,
         title: 'Start',
+        icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
         draggable:true,
       });
 
@@ -36,6 +39,7 @@ mapOptions);
         position: pos,
         map: map,
         title: 'Stop',
+        icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
         draggable:true,
       });
 
@@ -47,6 +51,42 @@ mapOptions);
 //      google.maps.event.addListener(new_marker,'click',function(e){
 //        infoWindow.open(map, marker);
 //      });
+
+
+//Grabbing all drivers positions
+
+      $.get("/drivers.json").done(function(data){
+       
+       for(var i=0; i<data.length; i++){
+          var driver = data[i];
+     
+          var current_pos = new google.maps.LatLng(driver.current_lat, driver.current_long);
+          var driver_marker = new google.maps.Marker({
+            position: current_pos,
+            map: map,
+            title: driver.name,
+            icon: 'http://maps.google.com/mapfiles/ms/icons/purple-dot.png',
+            draggable:false,
+          }); 
+        }
+      });
+      
+
+      $.get("/passengers.json").done(function(data){
+       
+       for(var i=0; i<data.length; i++){
+          var passenger = data[i];
+     
+          var current_pos = new google.maps.LatLng(passenger.current_lat, passenger.current_long);
+          var driver_marker = new google.maps.Marker({
+            position: current_pos,
+            map: map,
+            title: passenger.name,
+            icon: 'http://maps.google.com/mapfiles/ms/icons/purple-dot.png',
+            draggable:false,
+          }); 
+        }
+      });
 
 
       google.maps.event.addListener(start_marker, 'click', function() { 

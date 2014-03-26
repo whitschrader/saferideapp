@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  has_many :connections
+  has_many :rides, through: :connections
   
   def self.from_omniauth(auth)
 
