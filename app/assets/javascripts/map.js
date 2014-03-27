@@ -1,5 +1,21 @@
+var userLat;
+var userLong;
+
+function initRole(){
+  $.ajax({
+      type: 'get',
+      url: '/init_role.json',
+      data: { coordinates: { latitude: userLat, longitude: userLong } }
+    }).done(function(data){
+    console.log(data);
+  });
+}
+
+var map;
+var markers = [];
 
 function initialize() {
+
   var mapOptions = {
     // center: new google.maps.LatLng(-34.397, 150.644),
     zoom: 14,
@@ -14,6 +30,11 @@ function initialize() {
   if(navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
       var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
+      // define users lat and long and run initRole
+      userLat = position.coords.latitude;
+      userLong = position.coords.longitude;
+      initRole();
 
       // var infowindow = new google.maps.InfoWindow({
       //   map: map,
@@ -35,6 +56,8 @@ function initialize() {
         draggable:true,
       });
 
+      markers.push(start_marker);
+
       var end_marker = new google.maps.Marker({
         position: pos,
         map: map,
@@ -43,9 +66,8 @@ function initialize() {
         draggable:true,
       });
 
-      var InfoWindowOptions = {
-        content: 'Test!'
-      };
+      markers.push(end_marker);
+
 
 //      var InfoWindow = new google.maps.InfoWindow(InfoWindowOptions);
 //      google.maps.event.addListener(new_marker,'click',function(e){
@@ -53,45 +75,32 @@ function initialize() {
 //      });
 
 
-//Grabbing all drivers positions
+//Grabbing all available drivers positions
 
+      var driver;
+      var current_pos;
+      var driver_marker;
       $.get("/drivers.json").done(function(data){
        
-       for(var i=0; i<data.length; i++){
-          var driver = data[i];
-     
-          var current_pos = new google.maps.LatLng(driver.current_lat, driver.current_long);
-          var driver_marker = new google.maps.Marker({
+        for(var i=0; i<data.length; i++){
+          driver = data[i];
+          current_pos = new google.maps.LatLng(driver.current_lat, driver.current_long);
+          driver_marker = new google.maps.Marker({
             position: current_pos,
             map: map,
             title: driver.name,
             icon: 'http://maps.google.com/mapfiles/ms/icons/purple-dot.png',
             draggable:false,
           }); 
+          markers.push(driver_marker);
         }
       });
-      
 
-      $.get("/passengers.json").done(function(data){
-       
-       for(var i=0; i<data.length; i++){
-          var passenger = data[i];
-     
-          var current_pos = new google.maps.LatLng(passenger.current_lat, passenger.current_long);
-          var driver_marker = new google.maps.Marker({
-            position: current_pos,
-            map: map,
-            title: passenger.name,
-            icon: 'http://maps.google.com/mapfiles/ms/icons/purple-dot.png',
-            draggable:false,
-          }); 
-        }
-      });
 
 
       google.maps.event.addListener(start_marker, 'click', function() { 
-       alert("I am marker " + start_marker.title); 
-    }); 
+        alert("I am marker " + start_marker.title); 
+      }); 
 
       $("#getRide").click(function() {
 
@@ -112,9 +121,46 @@ function initialize() {
         alert(JSON.stringify(data));
       });
 
+      // var ride;
+      // var start_coords;
+      // var ride_marker;
 
+      $("#switchRole").click(function() {
+        clearMarkers();
+        $.ajax({
+          type: "get",
+          url: "/switch_role.json"
+        });
+        $.get("/avail_rides.json").done(function(data){
 
-      map.setCenter(pos);
+          console.log(data);
+
+          for(var i=0; i<data.length; i++){
+            var ride = data[i];
+            var start_coords = new google.maps.LatLng(ride.pickup_lat, ride.pickup_long);
+            var ride_marker = new google.maps.Marker({
+              position: start_coords,
+              map: map,
+              title: ride.id.toString(),
+              icon: 'http://maps.google.com/mapfiles/ms/icons/purple-dot.png',
+              draggable:false,
+            });
+
+            google.maps.event.addListener(ride_marker, 'click', function() {
+              map.setCenter(this.getPosition());
+              console.log(this.title);
+              $("div#driver-buttons").append("<button class='yes' id='" + this.title + "'>Yes</button><button class='no'>No</button>");
+            });
+
+// push passengers into the array 'markers' so that we can clear these by calling clearMarkers()
+            markers.push(ride_marker); 
+          }
+
+        });
+      });
+
+    map.setCenter(pos);
+    
     }, 
 
     function() {
@@ -124,6 +170,9 @@ function initialize() {
     // Browser doesn't support Geolocation
     handleNoGeolocation(false);
   }
+
+  console.log('end of initialize function');
+
 }
 
 function handleNoGeolocation(errorFlag) {
@@ -141,7 +190,38 @@ function handleNoGeolocation(errorFlag) {
 
 }
 
+function setAllMap(map) {
+  for (var i = 0; i < markers.length; i++) {
+    markers[i].setMap(map);
+  }
+}
+
+function clearMarkers() {
+  setAllMap(null);
+  markers =[];
+}
+
 google.maps.event.addDomListener(window, 'load', initialize);
 
+//set event listener on body to change when anything with an id of 'yes' is clicked
+$("body").on("click", ".yes", function(){
+  //current user is driver, status will change to unavailable
+  //current ride is confirmed is set to true
+
+  $.ajax({
+    type: 'get',
+    url: '/confirm_ride.json',
+    data: { id: this.id }
+  }).done(function(data){
+    console.log(data);
+    console.log("Confirmed!");
+  });
+
+});
+
+$("body").on("click", ".no", function(){
+  $("div#driver-buttons").empty(); // empties div
+  
+});
 
 

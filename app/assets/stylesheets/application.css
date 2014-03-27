@@ -31,3 +31,15 @@ body {
   margin-top: -10em;
   z-index: 5;
 }
+
+#nav-buttons, #driver-buttons {
+  display: inline-block;
+}
+
+.yes {
+  background-color: "green";
+}
+
+.no {
+  background-color: "red";
+}

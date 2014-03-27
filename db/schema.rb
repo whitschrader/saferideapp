@@ -29,9 +29,10 @@ ActiveRecord::Schema.define(version: 20140326005450) do
   create_table "rides", force: true do |t|
     t.float    "pickup_lat"
     t.float    "pickup_long"
-    t.boolean  "started"
-    t.boolean  "canceled"
-    t.boolean  "completed"
+    t.boolean  "started",      default: false
+    t.boolean  "canceled",     default: false
+    t.boolean  "completed",    default: false
+    t.boolean  "confirmed",    default: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.float    "dropoff_lat"

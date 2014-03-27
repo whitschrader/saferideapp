@@ -8,11 +8,10 @@ class CreateRides < ActiveRecord::Migration
       t.float :pickup_long
 
       
-      t.boolean :started
-      t.boolean :canceled
-      t.boolean :completed
-
-
+      t.boolean :started,:default => false
+      t.boolean :canceled, :default => false
+      t.boolean :completed,:default => false
+      t.boolean :confirmed,:default => false
 
 
       t.timestamps

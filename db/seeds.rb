@@ -18,7 +18,7 @@ d = User.create(name:"Noah_UnAvail", current_lat:"37.78085856379926", current_lo
 i = Ride.create(pickup_long:"-122.44041346489257", pickup_lat: "37.793280512583676", dropoff_long:"-122.41921328443886", dropoff_lat:"37.78758293262829")
 j = Ride.create(pickup_long:"-122.44041346489444", pickup_lat: "37.793280512583733", dropoff_long:"-122.41921328483856", dropoff_lat:"37.78758293262129")
 k = Ride.create(pickup_long:"-122.44041346489557", pickup_lat: "37.793280512583376", dropoff_long:"-122.41921328483876", dropoff_lat:"37.78758293262229")
-l = Ride.create(pickup_long:"-122.44041346489657", pickup_lat: "37.793280512583276", dropoff_long:"-122.41921328483896", dropoff_lat:"37.78758293262329")
+l = Ride.create(pickup_long:"-122.44041346489657", pickup_lat: "37.793280512583276", dropoff_long:"-122.41921328483896", dropoff_lat:"37.78758293262500")
 
 a.rides << i
 #j.users << b
