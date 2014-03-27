@@ -27,7 +27,6 @@ class RidesController < ApplicationController
     respond_to do |f|
       f.json {render :json => @ride}
     end
-
   end
 
 

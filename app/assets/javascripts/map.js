@@ -1,3 +1,4 @@
+var currentState = 'passenger';
 var userLat;
 var userLong;
 
@@ -36,18 +37,6 @@ function initialize() {
       userLong = position.coords.longitude;
       initRole();
 
-      // var infowindow = new google.maps.InfoWindow({
-      //   map: map,
-      //   position: pos,
-      //   content: 'Location found using HTML5.'
-      // });
-
-      // var control = document.createElement('div'); 
-
-      // google.maps.event.addDomListener(control, 'click', function() {...}); 
-      // control.index = 1;   
-      //   map.controls[google.maps.ControlPosition.TOP_RIGHT].push(control);  
-
       var start_marker = new google.maps.Marker({
         position: pos,
         map: map,
@@ -75,7 +64,7 @@ function initialize() {
 //      });
 
 
-//Grabbing all available drivers positions
+//Grabbing all available drivers positions: this is 'passenger mode'
 
       var driver;
       var current_pos;
@@ -151,7 +140,6 @@ function initialize() {
               console.log(this.title);
               $("div#driver-buttons").append("<button class='yes' id='" + this.title + "'>Yes</button><button class='no'>No</button>");
             });
-
 // push passengers into the array 'markers' so that we can clear these by calling clearMarkers()
             markers.push(ride_marker); 
           }
@@ -196,6 +184,7 @@ function setAllMap(map) {
   }
 }
 
+//clears all the markes from the map
 function clearMarkers() {
   setAllMap(null);
   markers =[];
@@ -224,4 +213,78 @@ $("body").on("click", ".no", function(){
   
 });
 
+
+//toggles btwn driver and passenger modes
+function toggler(){
+  if (currentState === 'passenger') {
+    currentState = 'driver';
+    enterDriverMode();
+
+    
+  } else { 
+    currentState = 'passenger';
+    enterPassengerMode();
+    
+}}
+
+function enterDriverMode(){
+
+        clearMarkers();
+        $.ajax({
+          type: "get",
+          url: "/switch_role.json"
+        });
+        $.get("/avail_rides.json").done(function(data){
+
+          console.log(data);
+
+          for(var i=0; i<data.length; i++){
+            var ride = data[i];
+            var start_coords = new google.maps.LatLng(ride.pickup_lat, ride.pickup_long);
+            var ride_marker = new google.maps.Marker({
+              position: start_coords,
+              map: map,
+              title: ride.id.toString(),
+              icon: 'http://maps.google.com/mapfiles/ms/icons/purple-dot.png',
+              draggable:false,
+            });
+
+            google.maps.event.addListener(ride_marker, 'click', function() {
+              map.setCenter(this.getPosition());
+              console.log(this.title);
+              $("div#driver-buttons").append("<button class='yes' id='" + this.title + "'>Yes</button><button class='no'>No</button>");
+            });
+// push passengers into the array 'markers' so that we can clear these by calling clearMarkers()
+            markers.push(ride_marker); 
+          }
+
+        }); 
+
+}
+
+function enterPassengerMode(){
+
+  var driver;
+  var current_pos;
+  var driver_marker;
+
+  clearMarkers();
+      
+
+      $.get("/drivers.json").done(function(data){
+       
+        for(var i=0; i<data.length; i++){
+          driver = data[i];
+          current_pos = new google.maps.LatLng(driver.current_lat, driver.current_long);
+          driver_marker = new google.maps.Marker({
+            position: current_pos,
+            map: map,
+            title: driver.name,
+            icon: 'http://maps.google.com/mapfiles/ms/icons/purple-dot.png',
+            draggable:false,
+          }); 
+          markers.push(driver_marker);
+        }
+  });
+}
 
