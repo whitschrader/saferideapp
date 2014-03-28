@@ -20,11 +20,16 @@ class UsersController < ApplicationController
     respond_with current_user.role
   end
 
-  def switch_role
-
+  def switch_to_driver
     current_user.update_attributes(role:"driver") 
     respond_with current_user.role
   end
+
+  def switch_to_passenger
+    current_user.update_attributes(role:"passenger") 
+    respond_with current_user.role
+  end
+
 
 
 

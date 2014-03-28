@@ -9,7 +9,7 @@ gem 'pg'
 # for angular to rails
 gem "angularjs-rails", "~> 1.0.8"
 
-
+gem 'twilio-ruby'
 
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'

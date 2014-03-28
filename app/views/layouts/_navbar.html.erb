@@ -1,19 +1,14 @@
   
 
-<nav class="navbar-text navbar-fixed-top">
-  <div class="container">
-    <% if current_user %>
-      Welcome <%= current_user.name %></strong>!
-      <%= link_to "Sign Out", signout_path, id:"sign_out" %>
-    <% else %>
-      <%= link_to  "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
-    <% end %> 
-  </div>
 
-
-  <% flash.each do |name, msg| %>
+      <% if current_user %>
+        <p class="navbar-text navbar-right"> Welcome <%= current_user.name %> </p>
+        <%= link_to "Sign Out", signout_path, id:"sign_out" %>
+      <% else %>
+        <%= link_to  "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
+      <% end %> 
+    <% flash.each do |name, msg| %>
     <%= content_tag :div, msg, id: "flash_#{name}"%>
   <% end %>
-</nav>
 
 

@@ -23,11 +23,15 @@ class RidesController < ApplicationController
     current_user.status = 'unavailable'
     id = params['id'].to_i
     @ride = Ride.find(id)
+    @ride.users.where(role:"passenger").each do |f|
+      #send message "Your ride is arriving soon"
+    end
     @ride.update_attributes(confirmed: true)
     respond_to do |f|
       f.json {render :json => @ride}
     end
   end
+
 
 
 end

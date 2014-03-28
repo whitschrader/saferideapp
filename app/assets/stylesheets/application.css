@@ -21,6 +21,10 @@ body {
   padding: 0 
 }
 
+#sign_in {
+  
+}
+
 #map-canvas { 
   height: 100%;
   z-index:1; 

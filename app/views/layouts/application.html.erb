@@ -4,22 +4,19 @@
 <head>
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-x  <script type="text/javascript"
+ <script type="text/javascript"
     src="https://maps.googleapis.com/maps/api/js?keyAIzaSyCfXwZQUEY0loMoDt-4U9aBTCfn7BkozzQ&sensor=true">
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
-
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-
- 
 </head>
 
 <body>
 
-<%= render 'layouts/navbar' %>
-<%= render 'layouts/map' %>
+  <%= render 'layouts/navbar' %>
+  <%= render 'layouts/map' %>
 
 <%= yield %>
 
