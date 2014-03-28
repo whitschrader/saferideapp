@@ -10,9 +10,9 @@ User.delete_all
 Ride.delete_all
 
 a = User.create(name:"Whit_Avail", current_lat:"37.779841", current_long:"-122.39491809999998", role: "driver", status:"available")
-b = User.create(name:"Whit_UnAvail", current_lat:"37.77821286878486", current_long:"-122.40332950747069", role: "driver", status:"unavailable")
+b = User.create(name:"Ben_Avail", current_lat:"37.77821286878486", current_long:"-122.40332950747069", role: "driver", status:"available")
 c = User.create(name:"Noah_Avail", current_lat:"37.780858563799116", current_long:"-122.41860737001952", role: "passenger", status:"available")
-d = User.create(name:"Noah_UnAvail", current_lat:"37.78085856379926", current_long:"-122.4186073700252", role: "passenger", status:"unavailable")
+d = User.create(name:"Jane_Avail", current_lat:"37.78085856379926", current_long:"-122.4186073700252", role: "passenger", status:"available")
 
 
 i = Ride.create(pickup_long:"-122.44041346489257", pickup_lat: "37.793280512583676", dropoff_long:"-122.41921328443886", dropoff_lat:"37.78758293262829")
