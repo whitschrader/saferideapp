@@ -15,6 +15,7 @@ get "confirm_ride", to: 'rides#confirm_ride'
 get "switch_to_driver", to: 'users#switch_to_driver'
 get "switch_to_passenger", to: 'users#switch_to_passenger'
 
+
 #authorizing sessions
 get 'auth/:provider/callback', to: 'sessions#create'
 get 'auth/failure', to: redirect('/')

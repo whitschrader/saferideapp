@@ -17,6 +17,31 @@ var markers = [];
 
 function initialize() {
 
+  //set event listener on body to change when anything with an id of 'yes' is clicked
+  $("body").on("click", ".yes", function(){
+    //current user is driver, status will change to unavailable
+    //current ride is confirmed is set to true
+
+    $.ajax({
+      type: 'get',
+      url: '/confirm_ride.json',
+      data: { id: this.id }
+    }).done(function(data){
+      console.log(data);
+      console.log("Confirmed!");
+    });
+
+  });
+
+  $("body").on("click", ".no", function(){
+    $("div#driver-buttons").empty(); // empties div
+  });
+
+
+
+
+
+
   var mapOptions = {
     // center: new google.maps.LatLng(-34.397, 150.644),
     zoom: 14,
@@ -143,6 +168,7 @@ function initialize() {
             google.maps.event.addListener(ride_marker, 'click', function() {
               map.setCenter(this.getPosition());
               console.log(this.title);
+              
               $("div#driver-buttons").append("<button class='yes' id='" + this.title + "'>Yes</button><button class='no'>No</button>");
             });
                 // push passengers into the array 'markers' so that we can clear these by calling clearMarkers()
@@ -195,28 +221,11 @@ function clearMarkers() {
   markers =[];
 }
 
+
 google.maps.event.addDomListener(window, 'load', initialize);
 
-//set event listener on body to change when anything with an id of 'yes' is clicked
-$("body").on("click", ".yes", function(){
-  //current user is driver, status will change to unavailable
-  //current ride is confirmed is set to true
 
-  $.ajax({
-    type: 'get',
-    url: '/confirm_ride.json',
-    data: { id: this.id }
-  }).done(function(data){
-    console.log(data);
-    console.log("Confirmed!");
-  });
 
-});
-
-$("body").on("click", ".no", function(){
-  $("div#driver-buttons").empty(); // empties div
-  
-});
 
 
 //toggles btwn driver and passenger modes
@@ -239,7 +248,7 @@ function enterDriverMode(){
   clearMarkers();
   $.ajax({
     type: "get",
-    url: "/switch_role.json"
+    url: "/switch_to_driver.json"
   });
   $.get("/avail_rides.json").done(function(data){
 
