@@ -1,6 +1,6 @@
 class RidesController < ApplicationController
 
-
+  include ApplicationHelper
 
   def create
     parameters = params.require(:ride).permit(:pickup_lat, :pickup_long, :dropoff_lat, :dropoff_long)
@@ -23,14 +23,72 @@ class RidesController < ApplicationController
     current_user.status = 'unavailable'
     id = params['id'].to_i
     @ride = Ride.find(id)
-    @ride.users.where(role:"passenger").each do |f|
-      #send message "Your ride is arriving soon"
-    end
     @ride.update_attributes(confirmed: true)
+
+    passengers = @ride.users.where(role: "passenger")
+    confirmation_message = "#{current_user.name} confirmed your ride!"
+
+    passengers.each do |p|
+      send_text_message(p.id, confirmation_message)
+    end
+
     respond_to do |f|
       f.json {render :json => @ride}
     end
   end
+
+
+  def cancel_ride
+    #the id of the button is passed, but this is also the id of the ride
+    id = params['id'].to_i
+    @ride = Ride.find(id)
+
+    driver = @ride.users.where(role: "driver")[0] #taking an array, and taking the first element in that array
+    passengers = @ride.users.where(role: "passenger")
+
+    if current_user.role == "passenger"
+      #ride attribute canceled to 'true'
+    end
+
+    #ride attribute confirmed to 'false'
+    #driver attribute status to 'available'
+    #passenger attribute status to 'available'
+
+    
+    respond_to do |f|
+      f.json {render :json => @ride}
+    end
+  end
+
+  def start_ride
+    #the id of the button is passed, but this is also the id of the ride
+    id = params['id'].to_i
+    @ride = Ride.find(id)
+    
+    #change ride attribute started to true
+    @ride.update_attributes(started: true)
+
+    
+    respond_to do |f|
+      f.json {render :json => @ride}
+    end
+  end
+
+  def complete_ride
+    #the id of the button is passed, but this is also the id of the ride
+    id = params['id'].to_i
+    @ride = Ride.find(id)
+
+    #change ride attribute completed to true
+    @ride.update_attributes(completed: true)
+
+    
+    respond_to do |f|
+      f.json {render :json => @ride}
+    end
+  end
+
+
 
 
 

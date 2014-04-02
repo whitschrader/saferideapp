@@ -18,7 +18,7 @@ html {
 body { 
   height: 100%; 
   margin: 0; 
-  padding: 0 
+  padding: 0;
 }
 
 #sign_in {
@@ -36,14 +36,14 @@ body {
   z-index: 5;
 }
 
-#nav-buttons, #driver-buttons {
+#nav-buttons, #driver-buttons, #status-buttons {
   display: inline-block;
 }
 
 .yes {
-  background-color: "green";
+  background-color: green;
 }
 
 .no {
-  background-color: "red";
+  background-color: red;
 }

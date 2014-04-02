@@ -8,7 +8,10 @@ get "passengers", to: 'users#get_passengers'
 get "avail_rides", to: 'rides#get_avail_rides'
 get "init_role", to: 'users#init_role'
 
-#rider to passenger handshake
+#ride statuses
+get "cancel_ride", to: 'rides#cancel_ride'
+get "start_ride", to: 'rides#start_ride'
+get "complete_ride", to: 'rides#complete_ride'
 get "confirm_ride", to: 'rides#confirm_ride'
 
 #switching roles
