@@ -4,9 +4,11 @@ class RidesController < ApplicationController
 
   def create
     parameters = params.require(:ride).permit(:pickup_lat, :pickup_long, :dropoff_lat, :dropoff_long)
-    ride = Ride.create(parameters)
-    ride.users << current_user
-    render json: {}, status: 201
+    @ride = Ride.create(parameters)
+    @ride.users << current_user
+    respond_to do |f|
+      f.json {render :json => @ride}
+    end
   end
 
   def index
@@ -48,13 +50,20 @@ class RidesController < ApplicationController
 
     if current_user.role == "passenger"
       #ride attribute canceled to 'true'
+      @ride.update_attributes(canceled: true)
     end
 
     #ride attribute confirmed to 'false'
-    #driver attribute status to 'available'
-    #passenger attribute status to 'available'
+    @ride.update_attributes(confirmed: false)
 
+    #driver attribute status to 'available'
+    driver.update_attributes(status: 'available') if driver
     
+    #passenger attribute status to 'available'
+    passengers.each do |p|
+      p.update_attributes(status: 'available')
+    end
+
     respond_to do |f|
       f.json {render :json => @ride}
     end

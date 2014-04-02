@@ -165,7 +165,7 @@ $( window ).on('load', function() {
 
 
         google.maps.event.addListener(start_marker, 'click', function() { 
-          alert("I am marker " + start_marker.title); 
+      
         }); 
 
         $("#getRide").click(function() {
@@ -181,10 +181,13 @@ $( window ).on('load', function() {
             url: "/rides",
             data: data
           }).done(function( response ) {
-            alert( ("Requesting Drivers"));
+            console.log(response);
+          $("div#status-buttons").append("<button class='cancelRide btn btn-default' id='" + response.id + "'>Cancel Ride</button>");  
           });
 
-          alert(JSON.stringify(data));
+
+
+          
         });
 
 
@@ -319,7 +322,6 @@ $( window ).on('load', function() {
         google.maps.event.addListener(ride_marker, 'click', function() {
           console.log(this.title);
           $("div#driver-buttons").append("<button class='yes' id='" + this.title + "'>Yes</button><button class='no'>No</button>");
-
           $("div#status-buttons").append("<button class='cancelRide btn btn-default' id='" + this.title + "'>Cancel Ride</button>");
           $("div#status-buttons").append("<button class='startRide btn btn-success' id='" + this.title + "'>Start Ride</button>");
           $("div#status-buttons").append("<button class='completeRide btn btn-premium' id='" + this.title + "'>Complete Ride</button>");
