@@ -15,14 +15,15 @@
 html { 
   height: 100% 
 }
+
 body { 
   height: 100%; 
   margin: 0; 
   padding: 0;
 }
 
-#sign_in {
-
+.buttons div {
+  display: inline-block;
 }
 
 #map-canvas { 
@@ -36,7 +37,6 @@ body {
   z-index: 5;
 }
 
-.buttons div {
-  display: inline-block;
-}
+#sign_in {
 
+}
