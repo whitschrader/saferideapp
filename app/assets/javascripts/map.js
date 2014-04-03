@@ -1,3 +1,13 @@
+function hideDiv(idString) {
+  document.getElementById(idString).style.display="none";
+}
+
+function showDiv(idString) {
+  document.getElementById(idString).style.display="inline-block";
+}
+
+
+
 $( window ).on('load', function() {
 
     $("body").on("click", ".cancelRide", function(){
@@ -43,12 +53,16 @@ $( window ).on('load', function() {
       }).done(function(data){
         console.log(data);
         console.log("Confirmed!");
+
+        showDiv("start_ride_div");
+        showDiv("cancel_div");
+        hideDiv("confirmation_div");
       });
 
     });
 
     $("body").on("click", ".no", function(){
-      $("div#driver-buttons").empty(); // empties div
+      $("div#confirmation_div").empty(); // empties div
     });
 
     $("body").on("click", ".cancelRide", function(){
@@ -72,6 +86,11 @@ $( window ).on('load', function() {
       }).done(function(data){
         console.log(data);
         console.log("Ride Started!");
+
+        showDiv("complete_ride_div");
+        hideDiv("cancel_div");
+        hideDiv("start_ride_div");
+        hideDiv("switch_role_div");
       });
 
     });
@@ -85,14 +104,12 @@ $( window ).on('load', function() {
       }).done(function(data){
         console.log(data);
         console.log("Ride Completed!");
+
+        showDiv("switch_role_div");
+        hideDiv("complete_ride_div");
       });
 
     });
-
-
-
-
-
 
     var mapOptions = {
       // center: new google.maps.LatLng(-34.397, 150.644),
@@ -101,7 +118,6 @@ $( window ).on('load', function() {
     
     map = new google.maps.Map(document.getElementById('map-canvas'),
       mapOptions);
-
 
 
     // Try HTML5 geolocation
@@ -182,7 +198,7 @@ $( window ).on('load', function() {
             data: data
           }).done(function( response ) {
             console.log(response);
-          $("div#status-buttons").append("<button class='cancelRide btn btn-default' id='" + response.id + "'>Cancel Ride</button>");  
+          $("div#cancel_div").append("<button class='cancelRide btn btn-default' id='" + response.id + "'>Cancel Ride</button>");  
           });
 
 
@@ -286,11 +302,13 @@ $( window ).on('load', function() {
 
   function toggler(){
     if (currentState === 'passenger') {
+      hideDiv("get_ride_div");
       currentState = 'driver';
       enterDriverMode();
 
       
     } else { 
+      showDiv("get_ride_div");
       currentState = 'passenger';
       enterPassengerMode();    
     }
@@ -321,10 +339,13 @@ $( window ).on('load', function() {
 
         google.maps.event.addListener(ride_marker, 'click', function() {
           console.log(this.title);
-          $("div#driver-buttons").append("<button class='yes btn btn-success' id='" + this.title + "'>Yes</button><button class='no btn btn-danger'>No</button>");
-          $("div#status-buttons").append("<button class='cancelRide btn btn-default' id='" + this.title + "'>Cancel Ride</button>");
-          $("div#status-buttons").append("<button class='startRide btn btn-success' id='" + this.title + "'>Start Ride</button>");
-          $("div#status-buttons").append("<button class='completeRide btn btn-danger' id='" + this.title + "'>Complete Ride</button>");
+          $("div#confirmation_div").append("<button class='yes btn btn-success' id='" + this.title + "'>Yes</button><button class='no btn btn-danger'>No</button>");
+          $("div#cancel_div").append("<button class='cancelRide btn btn-default' id='" + this.title + "'>Cancel Ride</button>");
+          $("div#start_ride_div").append("<button class='startRide btn btn-success' id='" + this.title + "'>Start Ride</button>");
+          $("div#complete_ride_div").append("<button class='completeRide btn btn-danger' id='" + this.title + "'>Complete Ride</button>");
+          hideDiv("start_ride_div");
+          hideDiv("complete_ride_div");
+          hideDiv("cancel_div");
         });
       // push passengers into the array 'markers' so that we can clear these by calling clearMarkers()
         markers.push(ride_marker); 
@@ -335,8 +356,54 @@ $( window ).on('load', function() {
   function enterPassengerMode(){
     clearMarkers();
 
+    //reinitialize the user's location once in passenger mode  
+    // var mapOptions = {
+    //   zoom: 14,
+    // };
+    
+    // map = new google.maps.Map(document.getElementById('map-canvas'),
+    //   mapOptions);
+
+    
+
+
+    // Try HTML5 geolocation
+    if(navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
+        // define users lat and long and run initRole
+        userLat = position.coords.latitude;
+        userLong = position.coords.longitude;
+        initRole();
+
+        var start_marker = new google.maps.Marker({
+          position: pos,
+          map: map,
+          title: 'Start',
+          icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+          draggable:true,
+        });
+
+        markers.push(start_marker);
+
+        var end_marker = new google.maps.Marker({
+          position: pos,
+          map: map,
+          title: 'Stop',
+          icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
+          draggable:true,
+        });
+
+        markers.push(end_marker);
+
+      });
+    }
+
+
+
     var driver;
-    var current_pos;
+    var driver_current_pos;
     var driver_marker;
 
     $.ajax({
@@ -348,9 +415,9 @@ $( window ).on('load', function() {
      
       for(var i=0; i<data.length; i++){
         driver = data[i];
-        current_pos = new google.maps.LatLng(driver.current_lat, driver.current_long);
+        driver_current_pos = new google.maps.LatLng(driver.current_lat, driver.current_long);
         driver_marker = new google.maps.Marker({
-          position: current_pos,
+          position: driver_current_pos,
           map: map,
           title: driver.name,
           icon: 'http://maps.google.com/mapfiles/ms/icons/purple-dot.png',
