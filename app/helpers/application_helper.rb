@@ -2,8 +2,6 @@ module ApplicationHelper
 
   def send_text_message(id, message)
 
-    binding.pry
-
     receiver = User.find_by_id(id)
     number_to_send_to = "+1#{receiver.phone}"
 

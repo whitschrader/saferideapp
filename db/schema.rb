@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 20140326005450) do
     t.string   "name"
     t.string   "oauth_token"
     t.datetime "oauth_expires_at"
-    t.integer  "phone"
+    t.integer  "phone",            limit: 8
     t.float    "current_lat"
     t.float    "current_long"
     t.string   "status"

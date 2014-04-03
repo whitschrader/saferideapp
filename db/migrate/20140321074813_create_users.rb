@@ -6,7 +6,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :name
       t.string :oauth_token
       t.datetime :oauth_expires_at
-      t.integer :phone
+      t.integer :phone, :limit => 5
       t.float :current_lat
       t.float :current_long
       t.string :status

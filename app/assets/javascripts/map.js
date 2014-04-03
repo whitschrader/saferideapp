@@ -321,10 +321,10 @@ $( window ).on('load', function() {
 
         google.maps.event.addListener(ride_marker, 'click', function() {
           console.log(this.title);
-          $("div#driver-buttons").append("<button class='yes' id='" + this.title + "'>Yes</button><button class='no'>No</button>");
+          $("div#driver-buttons").append("<button class='yes btn btn-success' id='" + this.title + "'>Yes</button><button class='no btn btn-danger'>No</button>");
           $("div#status-buttons").append("<button class='cancelRide btn btn-default' id='" + this.title + "'>Cancel Ride</button>");
           $("div#status-buttons").append("<button class='startRide btn btn-success' id='" + this.title + "'>Start Ride</button>");
-          $("div#status-buttons").append("<button class='completeRide btn btn-premium' id='" + this.title + "'>Complete Ride</button>");
+          $("div#status-buttons").append("<button class='completeRide btn btn-danger' id='" + this.title + "'>Complete Ride</button>");
         });
       // push passengers into the array 'markers' so that we can clear these by calling clearMarkers()
         markers.push(ride_marker); 
