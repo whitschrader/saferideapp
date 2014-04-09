@@ -53,7 +53,8 @@ $( window ).on('load', function() {
 
     $("body").on("click", ".no", function(){
       allowMarkerClick = true;
-      $("div#confirmation_div").empty(); // empties div
+      showDiv("switch_role_div");
+      hideDiv("confirmation_div");
     });
 
     $("body").on("click", ".cancelRide", function(){
