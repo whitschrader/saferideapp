@@ -355,6 +355,7 @@ $( window ).on('load', function() {
             $("div#start_ride_div").append("<button class='startRide btn btn-success' id='" + this.title + "'>Start Ride</button>");
             $("div#complete_ride_div").append("<button class='completeRide btn btn-danger' id='" + this.title + "'>Complete Ride</button>");
 
+            hideDiv("switch_role_div");
             hideDiv("start_ride_div");
             hideDiv("complete_ride_div");
             hideDiv("cancel_div");
