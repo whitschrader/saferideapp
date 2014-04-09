@@ -38,9 +38,14 @@ class UsersController < ApplicationController
   end
 
   def update_phone
-    phone = params["user"]["phone"].to_i
-    current_user.update_attributes(phone: phone)
-    redirect_to root_path
+    phone = params["user"]["phone"].gsub(/\D/, '')
+    if phone.length == 10
+      current_user.update_attributes(phone: phone.to_i)
+      redirect_to root_path
+    else
+      redirect_to phone_path
+      flash[:alert] = "Please enter a 10 digit phone number"
+    end
   end
 
 

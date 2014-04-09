@@ -100,8 +100,7 @@ $( window ).on('load', function() {
       }).done(function(data){
         console.log(data);
         console.log("Ride Completed!");
-        $("confirmation_div").empty();
-        showDiv("confirmation_div");
+        hideDiv("confirmation_div");
         showDiv("switch_role_div");
         hideDiv("complete_ride_div");
       });
@@ -360,6 +359,7 @@ $( window ).on('load', function() {
             hideDiv("start_ride_div");
             hideDiv("complete_ride_div");
             hideDiv("cancel_div");
+            showDiv("confirmation_div");
           }
           console.log(this.title);
           

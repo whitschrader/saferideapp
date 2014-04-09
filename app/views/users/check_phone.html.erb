@@ -1,5 +1,7 @@
 <h1> What is your phone number? </h1>
 
+<%= flash[:alert] %>
+
 <%= form_for @user do |u| %>
 	<%= u.text_field :phone, placeholder: "Phone" %> 
 
