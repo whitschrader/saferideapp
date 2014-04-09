@@ -30,6 +30,21 @@ class UsersController < ApplicationController
     respond_with current_user.role
   end
 
+  def sign_in
+  end
+
+  def check_phone
+    @user = current_user 
+  end
+
+  def update_phone
+    phone = params["user"]["phone"].to_i
+    current_user.update_attributes(phone: phone)
+    redirect_to root_path
+  end
+
+
+
 
 
 

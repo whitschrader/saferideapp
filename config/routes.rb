@@ -23,6 +23,11 @@ get "switch_to_passenger", to: 'users#switch_to_passenger'
 get 'auth/:provider/callback', to: 'sessions#create'
 get 'auth/failure', to: redirect('/')
 get 'signout', to: 'sessions#destroy', as: 'signout'
+get 'sign_in', to: 'users#sign_in', as: 'signin'
+get 'phone', to: 'users#check_phone', as: 'phone'
+
+#updating user's phone
+patch 'update_phone', to: 'users#update_phone', as: 'user'
 
 resources :rides
 
