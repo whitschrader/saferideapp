@@ -349,10 +349,10 @@ $( window ).on('load', function() {
             $("div#start_ride_div").append("<button class='startRide btn btn-success' id='" + this.title + "'>Start Ride</button>");
             $("div#complete_ride_div").append("<button class='completeRide btn btn-danger' id='" + this.title + "'>Complete Ride</button>");
 
-            $('.yes').css({'width': buttonWidth / 2 - 1});
-            $('.no').css({'width': buttonWidth / 2 - 1});
-            $('.cancelRide').css({'width': buttonWidth / 2 - 1, 'border-top-right-radius': 0, 'border-bottom-right-radius': 0});
-            $('.startRide').css({'width': buttonWidth / 2 - 1});
+            $('.yes').css({'width': buttonWidth / 2 - 10});
+            $('.no').css({'width': buttonWidth / 2 - 10});
+            $('.cancelRide').css({'width': buttonWidth / 2 - 10, 'border-top-right-radius': 0, 'border-bottom-right-radius': 0});
+            $('.startRide').css({'width': buttonWidth / 2 - 10});
             $('.completeRide').css({'width': buttonWidth});
 
             hideDiv("switch_role_div");
