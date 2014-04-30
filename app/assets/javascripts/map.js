@@ -8,6 +8,11 @@ function showDiv(idString) {
 
 $( window ).on('load', function() {
 
+  var buttonWidth = window.innerWidth * 0.8
+  $('.buttons').css({'left': window.innerWidth * 0.1});
+  $('#getRide').css({'width': buttonWidth});
+
+
   var currentState = 'passenger';
   var userLat;
   var userLong;
@@ -108,6 +113,7 @@ $( window ).on('load', function() {
     var mapOptions = {
       // center: new google.maps.LatLng(-34.397, 150.644),
       zoom: 14,
+      panControl: false
     };
     
     map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
@@ -185,7 +191,8 @@ $( window ).on('load', function() {
             hideDiv("get_ride_div");
             showDiv("cancel_div");
             $("div#cancel_div").empty();
-            $("div#cancel_div").append("<button class='cancelRide btn btn-default' id='" + response.id + "'>Cancel Ride</button>");  
+            $("div#cancel_div").append("<button class='cancelRide btn btn-default' id='" + response.id + "'>Cancel Ride</button>");
+            $('.cancelRide').css({'width': buttonWidth});
           });
 
         });
@@ -341,6 +348,12 @@ $( window ).on('load', function() {
             $("div#cancel_div").append("<button class='cancelRide btn btn-default' id='" + this.title + "'>Cancel Ride</button>");
             $("div#start_ride_div").append("<button class='startRide btn btn-success' id='" + this.title + "'>Start Ride</button>");
             $("div#complete_ride_div").append("<button class='completeRide btn btn-danger' id='" + this.title + "'>Complete Ride</button>");
+
+            $('.yes').css({'width': buttonWidth / 2});
+            $('.no').css({'width': buttonWidth / 2});
+            $('.cancelRide').css({'width': buttonWidth / 2});
+            $('.startRide').css({'width': buttonWidth / 2});
+            $('.completeRide').css({'width': buttonWidth});
 
             hideDiv("switch_role_div");
             hideDiv("start_ride_div");
