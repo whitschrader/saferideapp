@@ -344,7 +344,7 @@ $( window ).on('load', function() {
 
             // append buttons for the latest marker that was clicked
 
-            $("div#confirmation_div").append("<button class='yes btn btn-success' id='" + this.title + "'>Yes</button><button class='no btn btn-danger'>No</button>");
+            $("div#confirmation_div").append("<button class='yes btn btn-success' id='" + this.title + "'>Confirm</button><button class='no btn btn-danger'>Back</button>");
             $("div#cancel_div").append("<button class='cancelRide btn btn-default' id='" + this.title + "'>Cancel Ride</button>");
             $("div#start_ride_div").append("<button class='startRide btn btn-success' id='" + this.title + "'>Start Ride</button>");
             $("div#complete_ride_div").append("<button class='completeRide btn btn-danger' id='" + this.title + "'>Complete Ride</button>");
