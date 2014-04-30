@@ -1,10 +1,19 @@
-<h1> What is your phone number? </h1>
+<div class="phone_page container">
 
-<%= flash[:alert] %>
+<div class="row">
+  <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+    <h1 class="phone">Please enter your mobile phone number</h1>
+    <%= flash[:alert] %>
+  </div>
+</div>
 
-<%= form_for @user do |u| %>
-	<%= u.text_field :phone, placeholder: "Phone" %> 
+<div class="row">
+  <div class="col-md-10 col-md-offset-1 col-lg-4 col-lg-offset-4">
+    <%= form_for @user do |u| %>
+    	<%= u.text_field :phone, placeholder: "Phone", class: "form-control" %> 
+    	<%= u.submit "Submit", class: "btn btn-primary", id: "submit_phone" %>
+    <% end %>
+  </div>
+</div>
 
-	<%= u.submit "Submit" %>
-<% end %>
-
+</div>

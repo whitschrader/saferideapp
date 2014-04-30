@@ -186,6 +186,25 @@ button {
   font-size: 22px;
 }
 
+.phone {
+  font-family: 'Didact Gothic', sans-serif;
+  margin: 30px;
+  text-align: center;
+}
+
+.phone_page {
+  margin-top: 200px;
+}
+
+#submit_phone {
+  font-family: 'Didact Gothic', sans-serif;
+  background-color: black;
+  border: none;
+  border-radius: 3px;
+  margin-top: 20px;
+  width: 100%;
+}
+
 
 @media only screen and (max-device-width : 640px) {
 
@@ -202,12 +221,13 @@ button {
   }
 
   #saferide_logo {
+    margin: 50px auto;
     height: 180px;
   }
 
   #sign_in {
     height: 60px;
-    margin: 60px auto;
+    margin: 50px auto;
   }
 
   .power-statement {
