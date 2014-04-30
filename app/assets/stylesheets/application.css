@@ -83,7 +83,7 @@ body {
 }
 
 button {
-  height: 55px;
+  height: 52px;
 }
 
 .buttons {
@@ -92,7 +92,7 @@ button {
   bottom: 15px;
   left: 100px;
   right: 100px;
-  height: 55px;
+  height: 52px;
 }
 
 #switch_role_div {
@@ -124,15 +124,15 @@ button {
 #confirmation_div > button,
 #start_ride_div > button,
 #complete_ride_div > button {
-  font-size: 22px;
+  font-size: 20px;
   border-radius: 5px;
   font-family: 'Didact Gothic', sans-serif;
   letter-spacing: 1px;
 }
 
 #get_ride_div > button, #start_ride_div > button, #confirmation_div > .yes {
-  background-color: #357039;
-  border: 1px solid #245427;
+  background-color: #3D9144;
+  border: 1px solid #3D9144;
 }
 
 #cancel_div > button, #switch_role_div > button {
@@ -141,8 +141,8 @@ button {
 }
 
 #complete_ride_div > button, #confirmation_div > .no {
-  background-color: #9C0B0B;
-  border: 1px solid #630000;
+  background-color: #B83737;
+  border: 1px solid #B83737;
 }
 
 #confirmation_div > .yes {
