@@ -41,7 +41,7 @@ body {
   height: 20px;
   margin: auto;
   position: relative;
-  top: 10px;
+  top: 6px;
   background-color: salmon;
 }
 
@@ -52,12 +52,21 @@ body {
   font-size: 30px;
 }
 
+.mobile_logo {
+  height: 40px;
+  position: relative;
+  bottom: 4px;
+  display: inline;
+  vertical-align: top;
+  margin: auto 5px;
+}
+
 .welcome, #sign_out {
   position: fixed;
   color: white;
   font-size: 14px;
   z-index: 1100;
-  top: 22px;
+  top: 18px;
 }
 
 .welcome {
@@ -156,33 +165,5 @@ button {
 
 @media only screen and (max-device-width : 640px) {
 
-  html { 
-    height: 100%;
-  }
-
-  body { 
-    height: 100%; 
-    margin: 0; 
-    padding: 0;
-  }
-
-  .buttons div {
-    display: inline-block;
-  }
-
-  #map-canvas { 
-    height: 100%;
-    z-index:1; 
-  }
-
-  .requestRide {
-    padding-top: 10px;
-    margin-top: -10em;
-    z-index: 5;
-  }
-
-  #sign_in {
-
-  }
 
 }
