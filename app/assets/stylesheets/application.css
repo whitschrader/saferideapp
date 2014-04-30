@@ -27,7 +27,7 @@ body {
   top: 0;
   left: 0;
   right: 0;
-  height: 65px;
+  height: 55px;
   background-color: black;
   margin: 0;
   padding: 0;
@@ -69,28 +69,28 @@ body {
 }
 
 button {
-  height: 70px;
+  height: 60px;
 }
 
 .buttons {
   z-index: 200;
   position: fixed;
-  bottom: 50px;
+  bottom: 25px;
   left: 100px;
   right: 100px;
 }
 
 #switch_role_div {
   position: fixed;
-  top: 90px;
-  left: 50px;
+  top: 80px;
+  left: 40px;
   z-index: 100;
 }
 
 #switch_role_div > button {
-  width: 180px;
-  height: 50px;
-  font-size: 20px;
+  width: 130px;
+  height: 40px;
+  font-size: 14px;
   border-radius: 5px;
 }
 
@@ -108,7 +108,7 @@ button {
 #confirmation_div > button,
 #start_ride_div > button,
 #complete_ride_div > button {
-  font-size: 30px;
+  font-size: 25px;
   border-radius: 8px;
 }
 
@@ -128,7 +128,7 @@ button {
 }
 
 #map-canvas { 
-  margin-top: 65px;
+  margin-top: 55px;
   height: 100%;
   z-index:1; 
 }
