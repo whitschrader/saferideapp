@@ -201,4 +201,17 @@ button {
     left: 15px;
   }
 
+  #saferide_logo {
+    height: 180px;
+  }
+
+  #sign_in {
+    height: 60px;
+    margin: 60px auto;
+  }
+
+  .power-statement {
+    font-size: 20px;
+  }
+
 }
