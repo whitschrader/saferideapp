@@ -130,6 +130,21 @@ button {
   letter-spacing: 1px;
 }
 
+#get_ride_div > button, #start_ride_div > button, #confirmation_div > .yes {
+  background-color: #357039;
+  border: 1px solid #245427;
+}
+
+#cancel_div > button, #switch_role_div > button {
+  background-color: #FAF9F5;
+  border: 1px solid #3D3B35;
+}
+
+#complete_ride_div > button, #confirmation_div > .no {
+  background-color: #9C0B0B;
+  border: 1px solid #630000;
+}
+
 #confirmation_div > .yes {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
