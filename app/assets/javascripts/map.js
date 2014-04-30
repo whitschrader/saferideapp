@@ -9,7 +9,7 @@ function showDiv(idString) {
 $( window ).on('load', function() {
 
   var buttonWidth = window.innerWidth * 0.9;
-  $('.buttons').css({'left': window.innerWidth * 0.05, 'width': buttonWidth + 5});
+  $('.buttons').css({'left': window.innerWidth * 0.05, 'bottom': window.innerWidth * 0.05, 'width': buttonWidth + 5});
   $('#getRide').css({'width': buttonWidth});
 
 
