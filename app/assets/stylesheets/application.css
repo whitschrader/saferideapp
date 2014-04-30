@@ -193,13 +193,13 @@ button {
 }
 
 .phone_page {
-  margin-top: 5%;
+  margin-top: 15%;
 }
 
 #submit_phone {
   font-family: 'Didact Gothic', sans-serif;
   background-color: black;
-  border: none;
+  border: 1px solid black;
   border-radius: 3px;
   margin-top: 20px;
   width: 100%;
@@ -232,6 +232,10 @@ button {
 
   .power-statement {
     font-size: 20px;
+  }
+
+  .phone_page {
+    margin-top: 10%;
   }
 
 }
