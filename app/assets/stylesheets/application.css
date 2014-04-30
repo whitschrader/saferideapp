@@ -70,7 +70,6 @@ body {
 
 button {
   height: 70px;
-  font-size: 30px;
 }
 
 .buttons {
@@ -92,11 +91,40 @@ button {
   width: 180px;
   height: 50px;
   font-size: 20px;
+  border-radius: 5px;
+}
+
+#start_ride_div {
+  margin-left: -5px;
 }
 
 .buttons > div {
   display: inline-block;
   z-index: 200;
+}
+
+#get_ride_div > button,
+#cancel_div > button,
+#confirmation_div > button,
+#start_ride_div > button,
+#complete_ride_div > button {
+  font-size: 30px;
+  border-radius: 8px;
+}
+
+#confirmation_div > .yes {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+#confirmation_div > .no {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+#start_ride_div > button {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 }
 
 #map-canvas { 

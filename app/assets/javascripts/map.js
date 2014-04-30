@@ -351,7 +351,7 @@ $( window ).on('load', function() {
 
             $('.yes').css({'width': buttonWidth / 2});
             $('.no').css({'width': buttonWidth / 2});
-            $('.cancelRide').css({'width': buttonWidth / 2});
+            $('.cancelRide').css({'width': buttonWidth / 2, 'border-top-right-radius': 0, 'border-bottom-right-radius': 0});
             $('.startRide').css({'width': buttonWidth / 2});
             $('.completeRide').css({'width': buttonWidth});
 
