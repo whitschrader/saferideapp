@@ -11,6 +11,7 @@ $( window ).on('load', function() {
   var currentState = 'passenger';
   var userLat;
   var userLong;
+  var allowMarkerClick = true;
 
   function initRole(){
     $.ajax({
@@ -43,15 +44,23 @@ $( window ).on('load', function() {
         showDiv("start_ride_div");
         showDiv("cancel_div");
         hideDiv("confirmation_div");
+        hideDiv("switch_role_div");
       });
 
     });
 
     $("body").on("click", ".no", function(){
-      $("div#confirmation_div").empty(); // empties div
+      allowMarkerClick = true;
+      showDiv("switch_role_div");
+      hideDiv("confirmation_div");
     });
 
     $("body").on("click", ".cancelRide", function(){
+      allowMarkerClick = true;
+      showDiv("switch_role_div");
+      hideDiv("start_ride_div");
+      hideDiv("cancel_div");
+      if (currentState === "passenger") showDiv("get_ride_div");
 
       $.ajax({
         type: 'get',
@@ -76,13 +85,12 @@ $( window ).on('load', function() {
         showDiv("complete_ride_div");
         hideDiv("cancel_div");
         hideDiv("start_ride_div");
-        hideDiv("switch_role_div");
       });
 
     });
 
     $("body").on("click", ".completeRide", function(){
-
+      allowMarkerClick = true;
       $.ajax({
         type: 'get',
         url: '/complete_ride.json',
@@ -90,7 +98,7 @@ $( window ).on('load', function() {
       }).done(function(data){
         console.log(data);
         console.log("Ride Completed!");
-
+        hideDiv("confirmation_div");
         showDiv("switch_role_div");
         hideDiv("complete_ride_div");
       });
@@ -173,12 +181,13 @@ $( window ).on('load', function() {
             data: data
           }).done(function( response ) {
             console.log(response);
-          $("div#cancel_div").append("<button class='cancelRide btn btn-default' id='" + response.id + "'>Cancel Ride</button>");  
+            hideDiv("switch_role_div");
+            hideDiv("get_ride_div");
+            showDiv("cancel_div");
+            $("div#cancel_div").empty();
+            $("div#cancel_div").append("<button class='cancelRide btn btn-default' id='" + response.id + "'>Cancel Ride</button>");  
           });
 
-
-
-          
         });
 
 
@@ -293,6 +302,7 @@ $( window ).on('load', function() {
 
   function enterDriverMode(){
     clearMarkers();
+    allowMarkerClick = true;
     $.ajax({
       type: "get",
       url: "/switch_to_driver.json"
@@ -312,15 +322,34 @@ $( window ).on('load', function() {
           draggable:false,
         });
 
+        // creating logic that prevents user (as driver) from selecting multiple rides
+
         google.maps.event.addListener(ride_marker, 'click', function() {
+          if (allowMarkerClick === true){
+            allowMarkerClick = false;
+
+            // empty the divs first as to ensure that there is only one button in the div at a time
+            
+            $("div#confirmation_div").empty();
+            $("div#cancel_div").empty();
+            $("div#start_ride_div").empty();
+            $("div#complete_ride_div").empty();
+
+            // append buttons for the latest marker that was clicked
+
+            $("div#confirmation_div").append("<button class='yes btn btn-success' id='" + this.title + "'>Yes</button><button class='no btn btn-danger'>No</button>");
+            $("div#cancel_div").append("<button class='cancelRide btn btn-default' id='" + this.title + "'>Cancel Ride</button>");
+            $("div#start_ride_div").append("<button class='startRide btn btn-success' id='" + this.title + "'>Start Ride</button>");
+            $("div#complete_ride_div").append("<button class='completeRide btn btn-danger' id='" + this.title + "'>Complete Ride</button>");
+
+            hideDiv("switch_role_div");
+            hideDiv("start_ride_div");
+            hideDiv("complete_ride_div");
+            hideDiv("cancel_div");
+            showDiv("confirmation_div");
+          }
           console.log(this.title);
-          $("div#confirmation_div").append("<button class='yes btn btn-success' id='" + this.title + "'>Yes</button><button class='no btn btn-danger'>No</button>");
-          $("div#cancel_div").append("<button class='cancelRide btn btn-default' id='" + this.title + "'>Cancel Ride</button>");
-          $("div#start_ride_div").append("<button class='startRide btn btn-success' id='" + this.title + "'>Start Ride</button>");
-          $("div#complete_ride_div").append("<button class='completeRide btn btn-danger' id='" + this.title + "'>Complete Ride</button>");
-          hideDiv("start_ride_div");
-          hideDiv("complete_ride_div");
-          hideDiv("cancel_div");
+          
         });
         // push passengers into the array 'markers' so that we can clear these by calling clearMarkers()
         markers.push(ride_marker); 
