@@ -165,5 +165,8 @@ button {
 
 @media only screen and (max-device-width : 640px) {
 
+  .mobile_hide {
+    display: none;
+  }
 
 }

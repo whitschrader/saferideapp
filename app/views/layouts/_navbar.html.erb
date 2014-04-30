@@ -25,9 +25,9 @@
 <div class="navigation">
     <div class="logo-div">
       
-      <h1 class="main-logo"><img class="mobile_logo" src="<%= asset_path( 'mobile_logo.png' ) %>" /> SafeRide</h1>
+      <h1 class="main-logo"><img class="mobile_logo" src="<%= asset_path( 'mobile_logo.png' ) %>" /><span class="mobile_hide"> SafeRide</span></h1>
     </div>
-    <p class="welcome">Welcome <%=current_user.name %></p>
+    <p class="welcome"><span class="mobile_hide">Welcome </span><%=current_user.name %></p>
     <%= link_to "Sign Out", signout_path, id: "sign_out" %>
 </div>
 	
