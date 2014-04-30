@@ -1,26 +1,12 @@
 function hideDiv(idString) {
-  document.getElementById(idString).style.display="none";
+  document.getElementById(idString).style.display = "none";
 }
 
 function showDiv(idString) {
-  document.getElementById(idString).style.display="inline-block";
+  document.getElementById(idString).style.display = "inline-block";
 }
 
-
-
 $( window ).on('load', function() {
-
-    $("body").on("click", ".cancelRide", function(){
-      console.log("cancel ride?");
-    });
-
-    $("body").on("click", ".startRide", function(){
-      console.log("start ride?");
-    });
-
-    $("body").on("click", ".completeRide", function(){
-      console.log("complete ride?");
-    });
 
   var currentState = 'passenger';
   var userLat;
@@ -116,9 +102,7 @@ $( window ).on('load', function() {
       zoom: 14,
     };
     
-    map = new google.maps.Map(document.getElementById('map-canvas'),
-      mapOptions);
-
+    map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
     // Try HTML5 geolocation
     if(navigator.geolocation) {
@@ -150,14 +134,7 @@ $( window ).on('load', function() {
 
         markers.push(end_marker);
 
-
-  //      var InfoWindow = new google.maps.InfoWindow(InfoWindowOptions);
-  //      google.maps.event.addListener(new_marker,'click',function(e){
-  //        infoWindow.open(map, marker);
-  //      });
-
-
-  //Grabbing all available drivers positions: this is 'passenger mode'
+        // Grab all available drivers positions from passenger mode
 
         var driver;
         var current_pos;
@@ -177,8 +154,6 @@ $( window ).on('load', function() {
             markers.push(driver_marker);
           }
         });
-
-
 
         google.maps.event.addListener(start_marker, 'click', function() { 
       
@@ -347,7 +322,7 @@ $( window ).on('load', function() {
           hideDiv("complete_ride_div");
           hideDiv("cancel_div");
         });
-      // push passengers into the array 'markers' so that we can clear these by calling clearMarkers()
+        // push passengers into the array 'markers' so that we can clear these by calling clearMarkers()
         markers.push(ride_marker); 
       }
     }); 
@@ -355,18 +330,7 @@ $( window ).on('load', function() {
 
   function enterPassengerMode(){
     clearMarkers();
-
-    //reinitialize the user's location once in passenger mode  
-    // var mapOptions = {
-    //   zoom: 14,
-    // };
     
-    // map = new google.maps.Map(document.getElementById('map-canvas'),
-    //   mapOptions);
-
-    
-
-
     // Try HTML5 geolocation
     if(navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function(position) {
@@ -399,8 +363,6 @@ $( window ).on('load', function() {
 
       });
     }
-
-
 
     var driver;
     var driver_current_pos;
