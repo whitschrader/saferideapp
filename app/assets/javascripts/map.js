@@ -134,7 +134,7 @@ $( window ).on('load', function() {
           position: pos,
           map: map,
           title: 'Start',
-          icon: 'http://i.imgur.com/1QPPKcg.png',
+          icon: 'http://i.imgur.com/BUZPmq3.png',
           draggable:true,
         });
 
@@ -144,7 +144,7 @@ $( window ).on('load', function() {
           position: pos,
           map: map,
           title: 'Stop',
-          icon: 'http://i.imgur.com/bcgyFiG.png',
+          icon: 'http://i.imgur.com/NXVZDAI.png',
           draggable:true,
         });
 
@@ -327,7 +327,7 @@ $( window ).on('load', function() {
           position: start_coords,
           map: map,
           title: ride.id.toString(),
-          icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+          icon: 'http://i.imgur.com/uyDVLC3.png',
           draggable:false,
         });
 
@@ -426,7 +426,7 @@ $( window ).on('load', function() {
           position: driver_current_pos,
           map: map,
           title: driver.name,
-          icon: 'http://maps.google.com/mapfiles/ms/icons/purple-dot.png',
+          icon: 'http://i.imgur.com/0PXH78w.png',
           draggable:false,
         }); 
         markers.push(driver_marker);
