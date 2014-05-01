@@ -8,7 +8,7 @@ function showDiv(idString) {
 
 $( window ).on('load', function() {
 
-  var buttonWidth = window.innerWidth * 0.95;
+  var buttonWidth = window.innerWidth * 0.92;
   $('.buttons').css({'left': window.innerWidth * 0.04, 'bottom': window.innerWidth * 0.04, 'width': buttonWidth + 5});
   $('#getRide').css({'width': buttonWidth});
 
@@ -134,7 +134,7 @@ $( window ).on('load', function() {
           position: pos,
           map: map,
           title: 'Start',
-          icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+          icon: 'http://i.imgur.com/VwMHsnh.png',
           draggable:true,
         });
 
