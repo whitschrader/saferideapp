@@ -135,7 +135,7 @@ $( window ).on('load', function() {
           position: pos,
           map: map,
           title: 'Start',
-          icon: 'http://i.imgur.com/Xsok9VP.png', // green start
+          icon: 'http://i.imgur.com/YSQcb7X.png', // green start
           draggable:true,
         });
 
@@ -145,7 +145,7 @@ $( window ).on('load', function() {
           position: pos,
           map: map,
           title: 'Stop',
-          icon: 'http://i.imgur.com/b44NfKk.png', // red end
+          icon: 'http://i.imgur.com/q72W27m.png', // red end
           draggable:true,
         });
 
@@ -165,7 +165,7 @@ $( window ).on('load', function() {
               position: current_pos,
               map: map,
               title: driver.name,
-              icon: 'http://i.imgur.com/QEZXgNM.png', // driver black-white
+              icon: 'http://i.imgur.com/XeQFSdk.png', // driver black-white
               draggable:false,
             }); 
             markers.push(driver_marker);
@@ -226,7 +226,7 @@ $( window ).on('load', function() {
                 position: start_coords,
                 map: map,
                 title: ride.id.toString(),
-                icon: 'http://i.imgur.com/QEZXgNM.png', // driver black-white
+                icon: 'http://i.imgur.com/XeQFSdk.png', // driver black-white
                 draggable:false,
               });
 
@@ -328,7 +328,7 @@ $( window ).on('load', function() {
           position: start_coords,
           map: map,
           title: ride.id.toString(),
-          icon: 'http://i.imgur.com/Qnsckzm.png', // ride black-green
+          icon: 'http://i.imgur.com/AOLk8D9.png', // ride black-green
           draggable:false,
         });
 
@@ -390,7 +390,7 @@ $( window ).on('load', function() {
           position: pos,
           map: map,
           title: 'Start',
-          icon: 'http://i.imgur.com/Xsok9VP.png', // green start
+          icon: 'http://i.imgur.com/YSQcb7X.png', // green start
           draggable:true,
         });
 
@@ -400,7 +400,7 @@ $( window ).on('load', function() {
           position: pos,
           map: map,
           title: 'Stop',
-          icon: 'http://i.imgur.com/b44NfKk.png', // red end
+          icon: 'http://i.imgur.com/q72W27m.png', // red end
           draggable:true,
         });
 
@@ -427,7 +427,7 @@ $( window ).on('load', function() {
           position: driver_current_pos,
           map: map,
           title: driver.name,
-          icon: 'http://i.imgur.com/QEZXgNM.png', // driver black-white
+          icon: 'http://i.imgur.com/XeQFSdk.png', // driver black-white
           draggable:false,
         }); 
         markers.push(driver_marker);
