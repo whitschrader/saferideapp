@@ -134,7 +134,7 @@ $( window ).on('load', function() {
           position: pos,
           map: map,
           title: 'Start',
-          icon: 'http://i.imgur.com/VwMHsnh.png',
+          icon: 'http://i.imgur.com/1QPPKcg.png',
           draggable:true,
         });
 
@@ -144,7 +144,7 @@ $( window ).on('load', function() {
           position: pos,
           map: map,
           title: 'Stop',
-          icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
+          icon: 'http://i.imgur.com/bcgyFiG.png',
           draggable:true,
         });
 
