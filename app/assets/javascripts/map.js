@@ -8,8 +8,8 @@ function showDiv(idString) {
 
 $( window ).on('load', function() {
 
-  var buttonWidth = window.innerWidth * 0.94;
-  $('.buttons').css({'left': window.innerWidth * 0.03, 'bottom': window.innerWidth * 0.03, 'width': buttonWidth + 5});
+  var buttonWidth = window.innerWidth * 0.95;
+  $('.buttons').css({'left': window.innerWidth * 0.04, 'bottom': window.innerWidth * 0.04, 'width': buttonWidth + 5});
   $('#getRide').css({'width': buttonWidth});
 
 
